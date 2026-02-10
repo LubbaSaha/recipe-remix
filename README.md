@@ -8,23 +8,34 @@ The project focuses on performance, accessibility, and real-world engineering pr
 I recently started focusing on eating healthier and wanted a practical way to turn available ingredients into meaningful meals.  
 This project is both a personal tool and a learning journey, built to explore modern full-stack React development.
 
-## Core goals
+## Features (v0.1)
 
-- Ingredient-based recipe suggestions
-- Clean, mobile-first user experience
-- Accessibility-first UI
+- Input ingredients you have
+- View recipe suggestions
+- Mobile-first UI
+- Accessibility-friendly design
 - Performance-focused architecture
-- Learn-by-building approach
 
-## Tech stack (planned)
+## Planned Features (v0.2+)
 
-- Next.js (App Router)
-- TypeScript
-- Tailwind CSS
-- shadcn/ui
-- PostgreSQL
-- Prisma
+- AI-powered ingredient substitution
+- Recipe scaling
+- Meal plan saving
+- Nutrition API integration
 
-## Project status
+## Tech Stack
 
-🚧 Planning and initial setup
+- **Frontend / Framework**: Next.js (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI components**: shadcn/ui
+- **Database**: PostgreSQL (Prisma ORM)
+- **Version Control**: Git + GitHub
+
+## Getting Started
+
+1. Clone the repo:
+
+```bash
+git clone https://github.com/LubbaSaha/recipe-remix.git
+cd recipe-remix
