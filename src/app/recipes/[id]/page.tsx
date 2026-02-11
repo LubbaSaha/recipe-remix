@@ -11,7 +11,7 @@ export default async function RecipeDetailPage({ params }: Props) {
 
   const { id } = await params;
   
-  const recipe = mockRecipes.find((r) => r.id === params.id);
+  const recipe = mockRecipes.find((r) => r.id === id);
 
   if (!recipe) return notFound();
 
