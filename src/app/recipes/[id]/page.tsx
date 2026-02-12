@@ -1,17 +1,15 @@
-import { mockRecipes } from "@/data/mockRecipes";
+import { getRecipeById } from "@/lib/recipes";
 import { notFound } from "next/navigation";
 
 type Props = {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 };
 
 export default async function RecipeDetailPage({ params }: Props) {
 
   const { id } = await params;
   
-  const recipe = mockRecipes.find((r) => r.id === id);
+  const recipe = await getRecipeById(id);
 
   if (!recipe) return notFound();
 
