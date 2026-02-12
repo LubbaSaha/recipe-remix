@@ -1,4 +1,5 @@
 import { getRecipeById } from "@/lib/recipes";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 type Props = {
@@ -6,15 +7,20 @@ type Props = {
 };
 
 export default async function RecipeDetailPage({ params }: Props) {
-
   const { id } = await params;
-  
+
   const recipe = await getRecipeById(id);
 
   if (!recipe) return notFound();
 
   return (
     <div className="min-h-screen py-10 bg-gray-50">
+      <Link
+        href="/"
+        className="inline-block mb-4 text-sm text-blue-600 hover:underline"
+      >
+        ← Back to recipes
+      </Link>
       <div className="max-w-3xl p-8 mx-auto bg-white rounded-lg shadow-md">
         <h1 className="mb-2 text-3xl font-bold">{recipe.title}</h1>
         <p className="mb-6 text-gray-600">{recipe.description}</p>
