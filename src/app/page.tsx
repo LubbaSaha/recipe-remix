@@ -7,7 +7,9 @@ import { useRecipes } from "@/hooks/useRecipes";
 
 export default function HomePage() {
   const [query, setQuery] = useState("");
-  const { recipes } = useRecipes(query);
+  const recipes = useRecipes(query);
+
+  // console.log("Rendering HomePage with query:", query, "and recipes:", recipes);
 
   return (
     <div className="max-w-2xl p-8 mx-auto">

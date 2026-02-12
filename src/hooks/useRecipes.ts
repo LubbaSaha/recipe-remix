@@ -1,16 +1,21 @@
-import { useMemo } from "react";
 import { mockRecipes } from "@/data/mockRecipes";
+import { Recipe } from "@/types/recipe";
 
 export const useRecipes = (query: string) => {
-  const filteredRecipes = useMemo(() => {
-    if (!query) return mockRecipes;
+  const ingredients = query
+    .split(",")
+    .map((ing) => ing.trim().toLowerCase())
+    .filter(Boolean);
 
-    return mockRecipes.filter((recipe) =>
-      recipe.ingredients.some((ingredient) =>
-        ingredient.toLowerCase().includes(query.toLowerCase())
-      )
-    );
-  }, [query]);
+  const recipes = mockRecipes.filter((recipe: Recipe) => {
 
-  return { recipes: filteredRecipes };
+    return ingredients.some((ing) => {
+      return recipe.ingredients.some((recipeIng) =>
+        recipeIng.toLowerCase().includes(ing)
+      );
+    });
+
+  });
+
+  return recipes;
 };
