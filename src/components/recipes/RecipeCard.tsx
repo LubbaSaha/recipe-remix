@@ -12,12 +12,22 @@ export default function RecipeCard({ recipe }: Props) {
         <h2 className="text-lg font-semibold">{recipe.title}</h2>
         <p className="text-gray-600">{recipe.description}</p>
 
-        {recipe.matchCount > 0 && (
-          <div className="mt-3">
+        {recipe.totalQueryCount > 0 && (
+          <div className="mt-2 space-y-2">
             <span className="px-2 py-1 text-xs text-green-700 bg-green-100 rounded-full">
-              Matches {recipe.matchCount} of {recipe.totalQueryCount}{" "}
-              ingredients
+              Matches {recipe.matchCount} of {recipe.totalQueryCount} {" "} ingredients
             </span>
+
+            <div className="flex flex-wrap gap-2">
+              {recipe.matchedIngredients.map((ingredient) => (
+                <span
+                  key={ingredient}
+                  className="px-2 py-1 text-xs text-yellow-800 bg-yellow-100 rounded"
+                >
+                  {ingredient}
+                </span>
+              ))}
+            </div>
           </div>
         )}
       </div>
