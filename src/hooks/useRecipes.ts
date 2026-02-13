@@ -7,15 +7,29 @@ export const useRecipes = (query: string): ScoredRecipe[] => {
     .map((ing) => ing.trim().toLowerCase())
     .filter(Boolean);
 
+  if (ingredients.length === 0) {
+    return mockRecipes.map((recipe) => ({
+      ...recipe,
+      matchCount: 0,
+      totalQueryCount: 0,
+      matchedIngredients: [],
+    }));
+  }
+
   const recipes = mockRecipes
     .map((recipe: Recipe) => {
-      const matchCount = ingredients.filter((ing) =>
-        recipe.ingredients.some((recipeIng) =>
+      const matchedIngredients = recipe.ingredients.filter((recipeIng) =>
+        ingredients.some((ing) =>
           recipeIng.toLowerCase().includes(ing)
         )
-      ).length;
+      );
 
-      return { ...recipe, matchCount };
+      return { 
+          ...recipe, 
+          matchCount: matchedIngredients.length,
+          totalQueryCount: ingredients.length,
+          matchedIngredients
+        };
     })
     .filter((recipe) => recipe.matchCount > 0)
     .sort((a, b) => b.matchCount - a.matchCount);
