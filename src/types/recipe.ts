@@ -7,4 +7,6 @@ export type Recipe = {
 
 export type ScoredRecipe = Recipe & {
   matchCount: number;
+  totalQueryCount: number;
+  matchedIngredients: string[];
 };
