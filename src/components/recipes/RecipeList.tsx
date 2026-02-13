@@ -8,10 +8,10 @@ type Props = {
 export default function RecipeList({ recipes }: Props) {
   return (
     <div className="grid gap-4 mt-4">
-      {recipes.length === 0 && (
+      {recipes?.length === 0 && (
         <p className="mt-4 text-gray-500">No recipes found</p>
       )}
-      {recipes.map((recipe) => (
+      {recipes?.map((recipe) => (
         <RecipeCard key={recipe.id} recipe={recipe} />
       ))}
     </div>
