@@ -25,7 +25,7 @@ export const useRecipes = (query: string): ScoredRecipe[] => {
       return {
         ...recipe,
         matchCount: matchedIngredients.length,
-        totalQueryCount: ingredients.length,
+        totalQueryCount: recipe.ingredients.length,
         matchedIngredients,
       };
     })
