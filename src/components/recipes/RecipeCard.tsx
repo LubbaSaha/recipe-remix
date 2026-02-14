@@ -14,8 +14,8 @@ export default function RecipeCard({ recipe }: Props) {
 
         {recipe.totalQueryCount > 0 && (
           <div className="mt-2 space-y-2">
-            <div className="text-sm text-gray-500">
-              Matches {recipe.matchCount} of {recipe.totalQueryCount} {" "} ingredients
+            <div className="text-sm text-emerald-600">
+              Matches <span className="font-semibold text-Green-600">{recipe.matchCount}</span> of {recipe.totalQueryCount} {" "} ingredients
             </div>
 
             <div className="flex flex-wrap gap-2">
