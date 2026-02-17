@@ -1,19 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import IngredientInput from "@/components/recipes/IngredientInput";
 import RecipeList from "@/components/recipes/RecipeList";
 import { useRecipes } from "@/hooks/useRecipes";
 
+
 export default function HomePage() {
-  const [query, setQuery] = useState("");
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+
+  const query = searchParams?.get("ingredients") ?? "";
+
   const recipes = useRecipes(query);
 
-  // console.log("Rendering HomePage with query:", query, "and recipes:", recipes);
+  const handleChange = (value: string) => {
+
+    const params = new URLSearchParams(searchParams?.toString());
+
+    if (value) {
+      params.set("ingredients", value);
+    } else {
+      params.delete("ingredients");
+    }
+    router.push(`${pathname}?${params.toString()}`);
+  };
 
   return (
-    <div className="max-w-2xl p-8 mx-auto">
-      <IngredientInput value={query} onChange={setQuery} />
+    <div className="p-8 max-w-2xl mx-auto">
+      <IngredientInput value={query} onChange={handleChange} />
       <RecipeList recipes={recipes} />
     </div>
   );
