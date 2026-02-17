@@ -13,7 +13,6 @@ export default function HomePage() {
   const pathname = usePathname();
 
   const query = searchParams?.get("ingredients") ?? "";
-
   const recipes = useRecipes(query);
 
   const handleChange = (value: string) => {
@@ -25,7 +24,7 @@ export default function HomePage() {
     } else {
       params.delete("ingredients");
     }
-    router.push(`${pathname}?${params.toString()}`);
+    router.replace(`${pathname}?${params.toString()}`);
   };
 
   return (
