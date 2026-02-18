@@ -4,9 +4,7 @@ type Props = {
 };
 
 export default function IngredientInput({ value, onChange }: Props) {
-  // {
-  //   console.log("Rendering IngredientInput with value:", value)
-  // }
+
   return (
     <div>
       
