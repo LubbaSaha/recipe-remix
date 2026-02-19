@@ -9,4 +9,5 @@ export type ScoredRecipe = Recipe & {
   matchCount: number;
   totalQueryCount: number;
   matchedIngredients: string[];
+  missingIngredients: string[];
 };

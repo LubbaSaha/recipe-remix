@@ -12,23 +12,34 @@ export const useRecipes = (query: string): ScoredRecipe[] => {
       ...recipe,
       matchCount: 0,
       totalQueryCount: 0,
-      matchedIngredients: [],
+      matchedIngredients: [] as string[],
+      missingIngredients: [] as string[],
     }));
   }
 
-  return mockRecipes
-    .map((recipe: Recipe) => {
-      const matchedIngredients = recipe.ingredients.filter((recipeIng) =>
-        ingredients.some((ing) => recipeIng.toLowerCase().includes(ing))
-      );
+  const scored = mockRecipes.map((recipe) => {
+    const recipeIngredients = recipe.ingredients.map((ing) =>
+      ing.toLocaleLowerCase()
+    );
 
-      return {
-        ...recipe,
-        matchCount: matchedIngredients.length,
-        totalQueryCount: recipe.ingredients.length,
-        matchedIngredients,
-      };
-    })
-    .filter((recipe) => recipe.matchCount > 0)
+    const matchedIngredients = ingredients.filter((ing) =>
+      recipeIngredients.some((recipeIng) => recipeIng.includes(ing))
+    );
+
+    const missingIngredients = ingredients.filter((ing) =>
+      !matchedIngredients.includes(ing)
+    );
+
+    return {
+      ...recipe,
+      matchCount: matchedIngredients.length,
+      totalQueryCount: ingredients.length,
+      matchedIngredients,
+      missingIngredients,
+    }
+  });
+
+  return scored
+    .filter((sr) => sr.matchCount > 0)
     .sort((a, b) => b.matchCount - a.matchCount);
 };
