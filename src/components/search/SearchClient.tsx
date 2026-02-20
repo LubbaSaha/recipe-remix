@@ -11,10 +11,12 @@ export default function SearchClient() {
   const router = useRouter();
   const pathname = usePathname();
 
+  const [showFullMatchOnly, setShowFullMatchOnly] = useState(false);
+
   const [input, setInput] = useState(""); // local input state
   const debouncedQuery = useDebounce(input, 300); // for search & URL
 
-  const recipes = useRecipes(debouncedQuery);
+  const recipes = useRecipes(debouncedQuery, showFullMatchOnly);
 
   // Update URL only after debouncedQuery changes
   useEffect(() => {
@@ -28,6 +30,16 @@ export default function SearchClient() {
   return (
     <div className="p-8 max-w-2xl mx-auto">
       <IngredientInput value={input} onChange={setInput} />
+      
+      <div className="mt-4 flex items-center gap-2">
+        <input
+          type="checkbox"
+          checked={showFullMatchOnly}
+          onChange={(e) => setShowFullMatchOnly(e.target.checked)}
+        />
+        <label className="text-sm">Show only full matches</label>
+      </div>
+
       <RecipeList recipes={recipes} />
     </div>
   );
