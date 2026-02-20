@@ -1,7 +1,10 @@
 import { mockRecipes } from "@/data/mockRecipes";
 import { ScoredRecipe, Recipe } from "@/types/recipe";
 
-export const useRecipes = (query: string): ScoredRecipe[] => {
+export const useRecipes = (
+  query: string,
+  showFullMatchOnly: boolean
+): ScoredRecipe[] => {
   const ingredients = query
     .split(",")
     .map((i) => i.trim().toLowerCase())
@@ -26,8 +29,8 @@ export const useRecipes = (query: string): ScoredRecipe[] => {
       recipeIngredients.some((recipeIng) => recipeIng.includes(ing))
     );
 
-    const missingIngredients = ingredients.filter((ing) =>
-      !matchedIngredients.includes(ing)
+    const missingIngredients = ingredients.filter(
+      (ing) => !matchedIngredients.includes(ing)
     );
 
     return {
@@ -36,10 +39,16 @@ export const useRecipes = (query: string): ScoredRecipe[] => {
       totalQueryCount: ingredients.length,
       matchedIngredients,
       missingIngredients,
-    }
+    };
   });
 
-  return scored
-    .filter((sr) => sr.matchCount > 0)
+  const sorted = scored
+    .filter((r) => r.matchCount > 0)
     .sort((a, b) => b.matchCount - a.matchCount);
+
+  if (showFullMatchOnly) {
+    return sorted.filter((r) => r.matchCount === r.totalQueryCount);
+  }
+
+  return sorted;
 };
