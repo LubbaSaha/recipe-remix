@@ -25,6 +25,17 @@ This project is both a personal tool and a learning journey, built to explore mo
 - Meal plan saving
 - Nutrition API integration
 
+## Features (Current)
+
+- Instant ingredient search with **debounced filtering** (typing stays smooth)  
+- Recipe scoring based on **matched vs missing ingredients**  
+- Display of **matched and missing ingredients** per recipe  
+- **Full Match Only** toggle to show recipes that match all typed ingredients  
+- **Search state persists in the URL** for shareable and bookmarkable results  
+- Responsive UI with **clean separation of smart and dumb components**  
+- Supports multiple query parameters for easy sharing:  
+  e.g., `?ingredients=tomato,salt&fullMatch=true`
+
 ## Tech Stack
 
 - **Frontend / Framework**: Next.js (App Router)
