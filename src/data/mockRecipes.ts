@@ -5,7 +5,7 @@ export const mockRecipes: Recipe[] = [
     id: "1",
     title: "Tomato Pasta",
     description: "Simple pasta with tomato sauce",
-    ingredients: ["tomato", "pasta", "salt"]
+    ingredients: ["tomato", "pasta", "salt", "Olive oil", "Garlic", "Parsley"]
   },
   {
     id: "2",
