@@ -6,11 +6,32 @@ type Props = {
 };
 
 export default function RecipeCard({ recipe }: Props) {
+  const matchPercentage =
+    recipe.totalQueryCount > 0
+      ? (recipe.matchCount / recipe.totalQueryCount) * 100
+      : 0;
+
   return (
     <Link href={`/recipes/${recipe.id}`} className="block">
       <div className="p-4 transition bg-white rounded shadow hover:shadow-md">
         <h2 className="text-lg font-semibold">{recipe.title}</h2>
         <p className="text-gray-600">{recipe.description}</p>
+
+        {recipe.totalQueryCount > 0 && (
+          <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
+            <div
+              className={`h-2 rounded-full transition-all
+              ${
+                matchPercentage === 100
+                  ? "bg-green-600"
+                  : matchPercentage >= 50
+                  ? "bg-yellow-500"
+                  : "bg-red-600"
+              }`}
+              style={{ width: `${matchPercentage}%` }}
+            />
+          </div>
+        )}
 
         {recipe.totalQueryCount > 0 ? (
           <div>
