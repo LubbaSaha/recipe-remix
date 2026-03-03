@@ -1,15 +1,25 @@
 import { ScoredRecipe } from "@/types/recipe";
 import Link from "next/link";
+import { useState } from "react";
 
 type Props = {
   recipe: ScoredRecipe;
 };
 
 export default function RecipeCard({ recipe }: Props) {
+  const [showAll, setShowAll] = useState(false);
   const matchPercentage =
     recipe.totalQueryCount > 0
       ? (recipe.matchCount / recipe.totalQueryCount) * 100
       : 0;
+
+  const visibleIngredients = showAll
+    ? recipe.ingredients
+    : recipe.ingredients.slice(0, 5);
+
+  const hiddenCount = recipe.ingredients.length - visibleIngredients.length;
+
+  console.log(matchPercentage);
 
   return (
     <Link href={`/recipes/${recipe.id}`} className="block">
@@ -22,13 +32,15 @@ export default function RecipeCard({ recipe }: Props) {
             <div
               className={`h-2 rounded-full transition-all
               ${
-                matchPercentage === 100
+                matchPercentage >= 100
                   ? "bg-green-600"
                   : matchPercentage >= 50
                   ? "bg-yellow-500"
                   : "bg-red-600"
               }`}
-              style={{ width: `${matchPercentage}%` }}
+              style={{
+                width: `${matchPercentage >= 100 ? 100 : matchPercentage}%`,
+              }}
             />
           </div>
         )}
@@ -41,24 +53,40 @@ export default function RecipeCard({ recipe }: Props) {
             </div>
 
             <ul className="mt-2 list-disc list-inside text-sm grid grid-flow-col grid-rows-3">
-              {recipe.ingredients.slice(0, 5).map((ingredient) => {
-                const isMatched = recipe.matchedIngredients.some((matched) =>
-                  ingredient.toLowerCase().includes(matched)
-                );
+              {visibleIngredients.map((ingredient) => {
+                const isMatched = recipe.matchedIngredients.some((matched) => {
+                  const lowerIngredient = ingredient.toLowerCase();
+                  return (
+                    lowerIngredient.includes(matched) ||
+                    matched.includes(lowerIngredient)
+                  );
+                });
 
                 return (
                   <li
                     key={ingredient}
-                    className={isMatched ? "text-green-600 font-semibold" : ""}
+                    className={
+                      isMatched
+                        ? "font-semibold text-green-700"
+                        : "text-gray-500"
+                    }
                   >
                     {ingredient}
                   </li>
                 );
               })}
-              {recipe.ingredients.length > 5 && (
-                <p className="text-xs text-gray-400 mt-1">
-                  +{recipe.ingredients.length - 5} more
-                </p>
+
+              {hiddenCount > 0 && !showAll && (
+                <button
+                  type="button"
+                  className="mt-1 text-xs text-blue-600 hover:underline"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowAll(true);
+                  }}
+                >
+                  +{hiddenCount} more
+                </button>
               )}
             </ul>
           </div>
