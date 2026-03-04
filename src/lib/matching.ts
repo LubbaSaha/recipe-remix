@@ -11,7 +11,7 @@ export function getMatchedIngredients(
 ): string[] {
   return recipeIngredients.filter((ingredient) =>
     queryIngredients.some((query) =>
-      ingredient.toLocaleLowerCase().includes(query)
+      ingredient.toLowerCase().includes(query.toLowerCase())
     )
   );
 }
