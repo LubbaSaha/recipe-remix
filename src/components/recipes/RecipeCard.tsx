@@ -54,13 +54,8 @@ export default function RecipeCard({ recipe }: Props) {
 
             <ul className="mt-2 list-disc list-inside text-sm grid grid-flow-col grid-rows-3">
               {visibleIngredients.map((ingredient) => {
-                const isMatched = recipe.matchedIngredients.some((matched) => {
-                  const lowerIngredient = ingredient.toLowerCase();
-                  return (
-                    lowerIngredient.includes(matched) ||
-                    matched.includes(lowerIngredient)
-                  );
-                });
+                const isMatched =
+                  recipe.matchedIngredients.includes(ingredient);
 
                 return (
                   <li
