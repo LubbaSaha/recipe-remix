@@ -11,14 +11,14 @@ export default function SearchClient() {
   const router = useRouter();
   const searchParams = useSearchParams()!;
   const pathname = usePathname();
-  
-  const [input, setInput] = useState(
-    searchParams.get("ingredients") ?? ""
-  );
-  
+
+  const [input, setInput] = useState(searchParams.get("ingredients") ?? "");
+
   const [showFullMatchOnly, setShowFullMatchOnly] = useState(
     searchParams.get("fullMatch") === "true"
   );
+
+  const [isAdvanced, setIsAdvanced] = useState(false);
 
   const debouncedQuery = useDebounce(input, 300);
   const recipes = useRecipes(debouncedQuery, showFullMatchOnly);
@@ -38,6 +38,12 @@ export default function SearchClient() {
 
   return (
     <div className="p-8 max-w-2xl mx-auto">
+      {isAdvanced ? (
+        <span className="text-xs text-gray-600">Semantic Match</span>
+      ) : (
+        <span className="text-xs text-gray-600">Ingredient Match</span>
+      )}
+
       <IngredientInput value={input} onChange={setInput} />
 
       <div className="mt-4 flex items-center gap-2">
@@ -49,7 +55,7 @@ export default function SearchClient() {
         <label className="text-sm">Show only full matches</label>
       </div>
 
-      <RecipeList recipes={recipes} />
+      <RecipeList recipes={recipes} vectorMode={isAdvanced} />
     </div>
   );
 }
