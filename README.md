@@ -3,8 +3,6 @@
 Recipe Remix is a modern web application that helps users discover recipes based on the ingredients they already have.  
 The project focuses on performance, accessibility, and real-world engineering practices.
 
-# Recipe Remix
-
 Live Demo: https://recipe-remix-eta.vercel.app/
 
 ## Why this project
