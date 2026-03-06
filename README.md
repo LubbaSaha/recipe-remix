@@ -27,14 +27,41 @@ This project is both a personal tool and a learning journey, built to explore mo
 
 ## Features (Current)
 
-- Instant ingredient search with **debounced filtering** (typing stays smooth)  
-- Recipe scoring based on **matched vs missing ingredients**  
-- Display of **matched and missing ingredients** per recipe  
-- **Full Match Only** toggle to show recipes that match all typed ingredients  
-- **Search state persists in the URL** for shareable and bookmarkable results  
-- Responsive UI with **clean separation of smart and dumb components**  
+- Instant ingredient search with **debounced filtering** (typing stays smooth)
+- Recipe scoring based on **matched vs missing ingredients**
+- Display of **matched and missing ingredients** per recipe
+- **Full Match Only** toggle to show recipes that match all typed ingredients
+- **Search state persists in the URL** for shareable and bookmarkable results
+- Responsive UI with **clean separation of smart and dumb components**
 - Supports multiple query parameters for easy sharing:  
   e.g., `?ingredients=tomato,salt&fullMatch=true`
+
+## New Search Modes (Current)
+
+🔍 Dual Search Modes (Regular + Advanced Vector Search)
+
+Overview
+
+The application now supports two search modes: 1. Regular Search (Token-Based) 2. Advanced Search (Vector / Semantic-Based)
+
+Users can toggle between modes using the “Use Advanced Search” switch in the UI.
+
+=> Regular Search (Token Matching)
+
+This is the original search implementation.
+
+How it works:
+• User input is parsed into individual ingredients.
+• Each recipe is scored based on:
+• Number of matched ingredients
+• Total query ingredients
+• Partial matches are supported (e.g., "pa" matches "pasta").
+• Results are sorted by match count (descending).
+• A progress bar visualizes ingredient match percentage.
+
+🚀 Advanced Search (Vector / Semantic Matching)
+
+- Advanced search uses vector similarity instead of direct string matching.
 
 ## Tech Stack
 
@@ -52,3 +79,4 @@ This project is both a personal tool and a learning journey, built to explore mo
 ```bash
 git clone https://github.com/LubbaSaha/recipe-remix.git
 cd recipe-remix
+```

@@ -3,6 +3,7 @@ export type Recipe = {
   title: string;
   description: string;
   ingredients: string[];
+  embedding: number[]; // embedding
 };
 
 export type ScoredRecipe = Recipe & {

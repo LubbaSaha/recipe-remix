@@ -4,9 +4,10 @@ import { useState } from "react";
 
 type Props = {
   recipe: ScoredRecipe;
+  vectorMode?: boolean;
 };
 
-export default function RecipeCard({ recipe }: Props) {
+export default function RecipeCard({ recipe, vectorMode }: Props) {
   const [showAll, setShowAll] = useState(false);
   const matchPercentage =
     recipe.totalQueryCount > 0
@@ -19,30 +20,48 @@ export default function RecipeCard({ recipe }: Props) {
 
   const hiddenCount = recipe.ingredients.length - visibleIngredients.length;
 
-  console.log(matchPercentage);
-
   return (
     <Link href={`/recipes/${recipe.id}`} className="block">
       <div className="p-4 transition bg-white rounded shadow hover:shadow-md">
         <h2 className="text-lg font-semibold">{recipe.title}</h2>
         <p className="text-gray-600">{recipe.description}</p>
 
-        {recipe.totalQueryCount > 0 && (
+        {vectorMode && recipe.totalQueryCount > 0 ? (
+          // Vector search - progress bar
           <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
             <div
               className={`h-2 rounded-full transition-all
-              ${
-                matchPercentage >= 100
-                  ? "bg-green-600"
-                  : matchPercentage >= 50
-                  ? "bg-yellow-500"
-                  : "bg-red-600"
-              }`}
+                  ${
+                    matchPercentage >= 100
+                      ? "bg-green-600"
+                      : matchPercentage >= 50
+                      ? "bg-yellow-500"
+                      : "bg-red-600"
+                  }`}
               style={{
                 width: `${matchPercentage >= 100 ? 100 : matchPercentage}%`,
               }}
             />
           </div>
+        ) : (
+          // Regular search - progress bar
+          recipe.totalQueryCount > 0 && (
+            <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
+              <div
+                className={`h-2 rounded-full transition-all
+                  ${
+                    matchPercentage >= 100
+                      ? "bg-green-600"
+                      : matchPercentage >= 50
+                      ? "bg-yellow-500"
+                      : "bg-red-600"
+                  }`}
+                style={{
+                  width: `${matchPercentage >= 100 ? 100 : matchPercentage}%`,
+                }}
+              />
+            </div>
+          )
         )}
 
         {recipe.totalQueryCount > 0 ? (
