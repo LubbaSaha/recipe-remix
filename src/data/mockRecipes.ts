@@ -4,16 +4,22 @@ export const mockRecipes: Recipe[] = [
   {
     id: "1",
     title: "Tomato Pasta",
-    description: "Simple pasta with tomato sauce",
-    ingredients: ["tomato", "pasta", "salt", "Olive oil", "Garlic", "Parsley"],
-    embedding: [0.21, 0.77, 0.45, 0.11, 0.63], // dummy embedding vector
+    description: "Classic Italian pasta",
+    ingredients: ["pasta", "tomato", "garlic", "salt"],
+    embedding: [0.9, 0.1, 0.0], // mostly Italian
   },
-
   {
     id: "2",
-    title: "Egg Fried Rice",
-    description: "Quick fried rice with eggs",
-    ingredients: ["rice", "egg", "salt"],
-    embedding: [0.66, 0.12, 0.48, 0.32, 0.55], // dummy embedding vector
+    title: "Garlic Noodles",
+    description: "Asian style noodles",
+    ingredients: ["noodles", "garlic", "soy sauce"],
+    embedding: [0.1, 0.9, 0.0], // mostly Asian
+  },
+  {
+    id: "3",
+    title: "Chocolate Cake",
+    description: "Rich chocolate dessert",
+    ingredients: ["flour", "cocoa", "sugar"],
+    embedding: [0.0, 0.6, 1.0], // sweet
   },
 ];
