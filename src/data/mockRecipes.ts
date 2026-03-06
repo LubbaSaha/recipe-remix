@@ -6,7 +6,7 @@ export const mockRecipes: Recipe[] = [
     title: "Tomato Pasta",
     description: "Simple pasta with tomato sauce",
     ingredients: ["tomato", "pasta", "salt", "Olive oil", "Garlic", "Parsley"],
-    vector: [0.1, 0.2, 0.3], // Example embedding vector
+    embedding: [0.21, 0.77, 0.45, 0.11, 0.63], // dummy embedding vector
   },
 
   {
@@ -14,6 +14,6 @@ export const mockRecipes: Recipe[] = [
     title: "Egg Fried Rice",
     description: "Quick fried rice with eggs",
     ingredients: ["rice", "egg", "salt"],
-    vector: [], // Example embedding vector
+    embedding: [0.66, 0.12, 0.48, 0.32, 0.55], // dummy embedding vector
   },
 ];

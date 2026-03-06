@@ -26,19 +26,20 @@ export default function RecipeCard({ recipe, vectorMode }: Props) {
         <h2 className="text-lg font-semibold">{recipe.title}</h2>
         <p className="text-gray-600">{recipe.description}</p>
 
-        {vectorMode ? (
+        {vectorMode && recipe.totalQueryCount > 0 ? (
           // Vector search - progress bar
           <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
             <div
-              className="h-2 rounded-full transition-all"
+              className={`h-2 rounded-full transition-all
+                  ${
+                    matchPercentage >= 100
+                      ? "bg-green-600"
+                      : matchPercentage >= 50
+                      ? "bg-yellow-500"
+                      : "bg-red-600"
+                  }`}
               style={{
-                width: `${Math.round(recipe.matchCount * 100)}%`,
-                backgroundColor:
-                  recipe.matchCount >= 0.7
-                    ? "bg-green-600"
-                    : recipe.matchCount >= 0.4
-                    ? "bg-yellow-500"
-                    : "bg-red-600",
+                width: `${matchPercentage >= 100 ? 100 : matchPercentage}%`,
               }}
             />
           </div>
