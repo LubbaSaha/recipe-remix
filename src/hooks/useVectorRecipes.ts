@@ -1,12 +1,30 @@
 import { mockRecipes } from "@/data/mockRecipes";
 import { ScoredRecipe } from "@/types/recipe";
 
-function embedQuery(text: string): number[] {
-  return text
-    .toLowerCase()
-    .split("")
-    .slice(0, 5)
-    .map((c) => c.charCodeAt(0) / 255);
+function embedQuery(query: string): number[] {
+  const q = query.toLowerCase().split(" ").slice(0, 5);
+
+  console.log("Embedding query:", q);
+
+  if (q.includes("pasta") || q.includes("italian") || q.includes("tomato")) {
+    return [1, 0, 0];
+  }
+
+  if (q.includes("noodle") || q.includes("soy") || q.includes("asian")) {
+    return [0, 1, 0];
+  }
+
+  if (q.includes("cake") || q.includes("dessert") || q.includes("sweet")) {
+    return [0, 0, 1];
+  }
+
+  return [0.3, 0.3, 0.3]; // neutral
+
+  // return query
+  //   .toLowerCase()
+  //   .split("")
+  //   .slice(0, 5)
+  //   .map((c) => c.charCodeAt(0) / 255);
 }
 
 function consineSimilarity(vecA: number[], vecB: number[]): number {
@@ -24,6 +42,8 @@ function consineSimilarity(vecA: number[], vecB: number[]): number {
 
   const denominator = Math.sqrt(normA) * Math.sqrt(normB);
   if (denominator === 0) return 0;
+
+  console.log(dotProduct / denominator);
 
   return dotProduct / (denominator || 1);
 }
