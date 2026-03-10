@@ -1,30 +1,20 @@
 import { mockRecipes } from "@/data/mockRecipes";
 import { ScoredRecipe } from "@/types/recipe";
 
+const queryEmbeddings: Record<string, number[]> = {
+  "sweet dessert": [0.0429, 0.055, 0.0555, 0.0506, 0.0129, 0.0523],
+  pasta: [0.0476, 0.043, 0.0512, 0.0505, 0.0424, 0.0377],
+  noodles: [0.0548, 0.0508, 0.0078, 0.0534, 0.023, 0.0478],
+};
+
 function embedQuery(query: string): number[] {
-  const q = query.toLowerCase().split(" ").slice(0, 5);
+  const key = query.toLowerCase().trim();
 
-  console.log("Embedding query:", q);
-
-  if (q.includes("pasta") || q.includes("italian") || q.includes("tomato")) {
-    return [1, 0, 0];
+  if (queryEmbeddings[key]) {
+    return queryEmbeddings[key];
   }
 
-  if (q.includes("noodle") || q.includes("soy") || q.includes("asian")) {
-    return [0, 1, 0];
-  }
-
-  if (q.includes("cake") || q.includes("dessert") || q.includes("sweet")) {
-    return [0, 0, 1];
-  }
-
-  return [0.3, 0.3, 0.3]; // neutral
-
-  // return query
-  //   .toLowerCase()
-  //   .split("")
-  //   .slice(0, 5)
-  //   .map((c) => c.charCodeAt(0) / 255);
+  return [0, 0, 0, 0, 0]; // fallback
 }
 
 function consineSimilarity(vecA: number[], vecB: number[]): number {
@@ -43,9 +33,7 @@ function consineSimilarity(vecA: number[], vecB: number[]): number {
   const denominator = Math.sqrt(normA) * Math.sqrt(normB);
   if (denominator === 0) return 0;
 
-  console.log(dotProduct / denominator);
-
-  return dotProduct / (denominator || 1);
+  return dotProduct / denominator;
 }
 
 export const useVectorRecipe = (query: string): ScoredRecipe[] => {
