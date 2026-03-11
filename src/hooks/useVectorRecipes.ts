@@ -1,4 +1,4 @@
-import { mockRecipes } from "@/data/mockRecipes";
+import recipes from "@/data/recipeEmbeddings.json";
 import { ScoredRecipe } from "@/types/recipe";
 
 const queryEmbeddings: Record<string, number[]> = {
@@ -41,7 +41,7 @@ export const useVectorRecipe = (query: string): ScoredRecipe[] => {
 
   const queryVec = embedQuery(query);
 
-  const scored = mockRecipes.map((recipe) => {
+  const scored = recipes.map((recipe) => {
     const similiarity = consineSimilarity(queryVec, recipe.embedding);
 
     return {
