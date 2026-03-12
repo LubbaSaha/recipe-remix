@@ -1,22 +1,28 @@
-import { mockRecipes } from "@/data/mockRecipes";
+import recipes from "@/data/recipeEmbeddings.json";
+import queriesJSON from "@/data/queryEmbeddings.json";
 import { ScoredRecipe } from "@/types/recipe";
 
-const queryEmbeddings: Record<string, number[]> = {
-  "sweet dessert": [0.0429, 0.055, 0.0555, 0.0506, 0.0129, 0.0523],
-  pasta: [0.0476, 0.043, 0.0512, 0.0505, 0.0424, 0.0377],
-  noodles: [0.0548, 0.0508, 0.0078, 0.0534, 0.023, 0.0478],
-};
+// Type definition for query items
+interface Queryitem {
+  query: string;
+  embedding: number[];
+}
 
+const queries: Queryitem[] = queriesJSON as Queryitem[];
+
+// Create a lookup for query embeddings for quick access
+const queryEmbeddings: Record<string, number[]> = Object.fromEntries(
+  queries.map((q) => [q.query.toLowerCase().trim(), q.embedding])
+);
+
+// Function to embed a query using the lookup
 function embedQuery(query: string): number[] {
   const key = query.toLowerCase().trim();
 
-  if (queryEmbeddings[key]) {
-    return queryEmbeddings[key];
-  }
-
-  return [0, 0, 0, 0, 0]; // fallback
+  return queryEmbeddings[key] || queries[0].embedding; // Fallback to the first embedding if not found
 }
 
+// consine similarity function to compare two vectors
 function consineSimilarity(vecA: number[], vecB: number[]): number {
   const length = Math.min(vecA.length, vecB.length);
 
@@ -36,12 +42,13 @@ function consineSimilarity(vecA: number[], vecB: number[]): number {
   return dotProduct / denominator;
 }
 
+// The hook
 export const useVectorRecipe = (query: string): ScoredRecipe[] => {
   if (!query) return [];
 
   const queryVec = embedQuery(query);
 
-  const scored = mockRecipes.map((recipe) => {
+  const scored: ScoredRecipe[] = recipes.map((recipe) => {
     const similiarity = consineSimilarity(queryVec, recipe.embedding);
 
     return {
@@ -53,5 +60,6 @@ export const useVectorRecipe = (query: string): ScoredRecipe[] => {
     };
   });
 
+  // sort the highest match count first
   return scored.sort((a, b) => b.matchCount - a.matchCount);
 };
