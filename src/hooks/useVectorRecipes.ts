@@ -17,9 +17,15 @@ const queryEmbeddings: Record<string, number[]> = Object.fromEntries(
 
 // Function to embed a query using the lookup
 function embedQuery(query: string): number[] {
-  const key = query.toLowerCase().trim();
+  const input = query.toLowerCase();
 
-  return queryEmbeddings[key] || queries[0].embedding; // Fallback to the first embedding if not found
+  for (const q of queries) {
+    if (input.includes(q.query)) {
+      return q.embedding;
+    }
+  }
+
+  return queries[0].embedding; // fallback
 }
 
 // consine similarity function to compare two vectors
@@ -49,11 +55,14 @@ export const useVectorRecipe = (query: string): ScoredRecipe[] => {
   const queryVec = embedQuery(query);
 
   const scored: ScoredRecipe[] = recipes.map((recipe) => {
+    console.log("QUERY VECTOR:", queryVec.slice(0, 3));
+    console.log(recipe.title, recipe.embedding?.slice(0, 3));
+
     const similiarity = consineSimilarity(queryVec, recipe.embedding);
 
     return {
       ...recipe,
-      matchCount: similiarity,
+      matchCount: Number(similiarity.toFixed(3)),
       totalQueryCount: 1,
       matchedIngredients: [],
       missingIngredients: [],

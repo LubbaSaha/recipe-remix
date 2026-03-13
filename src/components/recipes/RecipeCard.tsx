@@ -8,8 +8,6 @@ type Props = {
 };
 
 export default function RecipeCard({ recipe, vectorMode }: Props) {
-  console.log(recipe, "recipe in card");
-
   const [showAll, setShowAll] = useState(false);
   const matchPercentage =
     recipe.totalQueryCount > 0
