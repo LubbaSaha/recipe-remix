@@ -55,20 +55,19 @@ export const useVectorRecipe = (query: string): ScoredRecipe[] => {
   const queryVec = embedQuery(query);
 
   const scored: ScoredRecipe[] = recipes.map((recipe) => {
-    console.log("QUERY VECTOR:", queryVec.slice(0, 3));
-    console.log(recipe.title, recipe.embedding?.slice(0, 3));
-
     const similiarity = consineSimilarity(queryVec, recipe.embedding);
 
     return {
       ...recipe,
-      matchCount: Number(similiarity.toFixed(3)),
+      matchCount: Math.round(similiarity * 100),
       totalQueryCount: 1,
       matchedIngredients: [],
       missingIngredients: [],
     };
   });
 
-  // sort the highest match count first
-  return scored.sort((a, b) => b.matchCount - a.matchCount);
+  // sort and filter the highest match count first
+  return scored
+    .filter((r) => r.matchCount > 55)
+    .sort((a, b) => b.matchCount - a.matchCount);
 };

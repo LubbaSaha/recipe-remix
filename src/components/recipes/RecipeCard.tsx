@@ -67,8 +67,10 @@ export default function RecipeCard({ recipe, vectorMode }: Props) {
         {recipe.totalQueryCount > 0 ? (
           <div>
             <div className="mt-2 text-xs">
-              Match Score:{" "}
-              <span className="font-semibold">{recipe.matchCount}</span>
+              {vectorMode ? "Semantic Match:" : "Match Score:"}{" "}
+              <span className="font-semibold">
+                {vectorMode ? `${recipe.matchCount}%` : recipe.matchCount}
+              </span>
             </div>
 
             <ul className="mt-2 list-disc list-inside text-sm grid grid-flow-col grid-rows-3">
