@@ -25,7 +25,10 @@ function embedQuery(query: string): number[] {
     }
   }
 
-  return queries[0].embedding; // fallback
+  // random fallback if no match found
+  const random = queries[Math.floor(Math.random() * queries.length)];
+
+  return random.embedding; // fallback
 }
 
 // consine similarity function to compare two vectors
