@@ -1,6 +1,6 @@
 export function parseQuery(query: string): string[] {
   return query
-    .split(",")
+    .split(/[:;,.\s-]+/i)
     .map((item) => item.trim().toLocaleLowerCase())
     .filter(Boolean);
 }
