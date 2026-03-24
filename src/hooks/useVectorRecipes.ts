@@ -101,8 +101,6 @@ function getKeywordScore(query: string, recipe: any): number {
 
 // The hook
 export const useVectorRecipe = (query: string): ScoredRecipe[] => {
-  if (!query) return [];
-
   const queryVec = embedQuery(query);
 
   const scored: ScoredRecipe[] = recipes.map((recipe) => {
@@ -114,6 +112,14 @@ export const useVectorRecipe = (query: string): ScoredRecipe[] => {
 
     const finalScore = 0.7 * vectorScore + 0.3 * normalizedKeyword;
 
+    console.log(
+      `Recipe: ${recipe.title}, Vector Score: ${vectorScore.toFixed(
+        3
+      )}, Keyword Score: ${normalizedKeyword.toFixed(
+        3
+      )}, Final Score: ${finalScore.toFixed(3)}`
+    );
+
     return {
       ...recipe,
       matchCount: finalScore,
@@ -123,8 +129,15 @@ export const useVectorRecipe = (query: string): ScoredRecipe[] => {
     };
   });
 
+  console.log(
+    "Scored Recipes:",
+    scored
+      .filter((r) => r.matchCount > 30)
+      .sort((a, b) => b.matchCount - a.matchCount)
+  );
+
   // sort and filter the highest match count first
   return scored
-    .filter((r) => r.matchCount > 30)
+    .filter((r) => r.matchCount > 0.5)
     .sort((a, b) => b.matchCount - a.matchCount);
 };

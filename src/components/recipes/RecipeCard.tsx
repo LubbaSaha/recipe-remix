@@ -35,14 +35,18 @@ export default function RecipeCard({ recipe, vectorMode }: Props) {
             <div
               className={`h-2 rounded-full transition-all
                   ${
-                    matchPercentage >= 100
+                    Math.round(recipe.matchCount * 100) >= 100
                       ? "bg-green-600"
-                      : matchPercentage >= 50
+                      : Math.round(recipe.matchCount * 100) >= 50
                       ? "bg-yellow-500"
                       : "bg-red-600"
                   }`}
               style={{
-                width: `${matchPercentage >= 100 ? 100 : matchPercentage}%`,
+                width: `${
+                  matchPercentage >= 100
+                    ? 100
+                    : Math.round(recipe.matchCount * 100)
+                }%`,
               }}
             />
           </div>
@@ -72,7 +76,9 @@ export default function RecipeCard({ recipe, vectorMode }: Props) {
             <div className="mt-2 text-xs">
               {vectorMode ? "Semantic Match:" : "Match Score:"}{" "}
               <span className="font-semibold">
-                {vectorMode ? `${recipe.matchCount}%` : recipe.matchCount}
+                {vectorMode
+                  ? `${Math.round(recipe.matchCount * 100)}%`
+                  : recipe.matchCount}
               </span>
             </div>
 

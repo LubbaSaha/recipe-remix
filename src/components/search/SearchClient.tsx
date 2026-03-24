@@ -28,6 +28,9 @@ export default function SearchClient() {
   const regularRecipes = useRecipes(debouncedQuery, showFullMatchOnly);
   const vectorRecipes = useVectorRecipe(debouncedQuery);
 
+  console.log("Regular Recipes:", regularRecipes);
+  console.log("Vector Recipes:", vectorRecipes);
+
   // Update URL when debouncedQuery or toggle changes
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -71,11 +74,10 @@ export default function SearchClient() {
         <span className="text-xs text-gray-600">Ingredient Match</span>
       )}
 
-      {isAdvanced ? (
-        <RecipeList recipes={vectorRecipes} vectorMode={isAdvanced} />
-      ) : (
-        <RecipeList recipes={regularRecipes} vectorMode={isAdvanced} />
-      )}
+      <RecipeList
+        recipes={isAdvanced ? vectorRecipes : regularRecipes}
+        vectorMode={isAdvanced}
+      />
     </div>
   );
 }
