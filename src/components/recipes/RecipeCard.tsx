@@ -4,10 +4,13 @@ import { useState } from "react";
 
 type Props = {
   recipe: ScoredRecipe;
-  vectorMode?: boolean;
+  vectorMode: boolean;
 };
 
 export default function RecipeCard({ recipe, vectorMode }: Props) {
+  console.log("Rendering RecipeCard with recipe:", recipe, vectorMode);
+  console.log("Hello world", vectorMode);
+
   const [showAll, setShowAll] = useState(false);
   const matchPercentage =
     recipe.totalQueryCount > 0

@@ -1,7 +1,6 @@
 import recipes from "@/data/recipeEmbeddings.json";
 import queriesJSON from "@/data/queryEmbeddings.json";
 import { ScoredRecipe } from "@/types/recipe";
-import { get } from "node:http";
 
 // Type definition for query items
 interface Queryitem {
@@ -18,7 +17,10 @@ const queryEmbeddings: Record<string, number[]> = Object.fromEntries(
 
 // Function to embed a query using the lookup
 function embedQuery(query: string): number[] {
-  const input = query.toLowerCase();
+  const input = query
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, "") // remove symbols
+    .trim();
 
   if (
     input.includes("pasta") ||
@@ -114,7 +116,7 @@ export const useVectorRecipe = (query: string): ScoredRecipe[] => {
 
     return {
       ...recipe,
-      matchCount: Math.round(finalScore * 100), // scale to percentage
+      matchCount: finalScore,
       totalQueryCount: 1,
       matchedIngredients: [],
       missingIngredients: [],
@@ -123,6 +125,6 @@ export const useVectorRecipe = (query: string): ScoredRecipe[] => {
 
   // sort and filter the highest match count first
   return scored
-    .filter((r) => r.matchCount > 55)
+    .filter((r) => r.matchCount > 30)
     .sort((a, b) => b.matchCount - a.matchCount);
 };

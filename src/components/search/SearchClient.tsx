@@ -23,6 +23,8 @@ export default function SearchClient() {
 
   const [isAdvanced, setIsAdvanced] = useState(false);
 
+  console.log("isAdvanced", isAdvanced);
+
   const regularRecipes = useRecipes(debouncedQuery, showFullMatchOnly);
   const vectorRecipes = useVectorRecipe(debouncedQuery);
 
