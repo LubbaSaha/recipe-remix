@@ -3,7 +3,7 @@ import RecipeCard from "./RecipeCard";
 
 type Props = {
   recipes: ScoredRecipe[];
-  vectorMode?: boolean;
+  vectorMode: boolean;
 };
 
 export default function RecipeList({ recipes, vectorMode }: Props) {
