@@ -23,13 +23,8 @@ export default function SearchClient() {
 
   const [isAdvanced, setIsAdvanced] = useState(false);
 
-  console.log("isAdvanced", isAdvanced);
-
   const regularRecipes = useRecipes(debouncedQuery, showFullMatchOnly);
   const vectorRecipes = useVectorRecipe(debouncedQuery);
-
-  console.log("Regular Recipes:", regularRecipes);
-  console.log("Vector Recipes:", vectorRecipes);
 
   // Update URL when debouncedQuery or toggle changes
   useEffect(() => {
