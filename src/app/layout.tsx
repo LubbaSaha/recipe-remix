@@ -1,10 +1,15 @@
 import "../styles/globals.css";
 import Header from "@/components/layout/Header";
-import { Inter } from "next/font/google";
+import { Epilogue, Plus_Jakarta_Sans } from "next/font/google";
 
-const inter = Inter({
+const epilogue = Epilogue({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-headline",
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
 });
 
 export default function RootLayout({
@@ -13,8 +18,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="font-sans antialiased text-gray-900 bg-gray-50">
+    <html
+      lang="en"
+      className={`${epilogue.variable} ${plusJakartaSans.variable}`}
+    >
+      <body className="font-body antialiased">
         <Header />
         <main className="min-h-screen">{children}</main>
       </body>

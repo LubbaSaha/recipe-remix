@@ -1,0 +1,32 @@
+---
+description: Next.js App Router + TypeScript + Tailwind project standards
+alwaysApply: true
+---
+
+# Project standards (must follow)
+
+## Framework + routing
+
+- Use **Next.js 14+ App Router** conventions (route handlers in `app/api/**/route.ts`, server components by default, client components only when needed).
+- Prefer server actions / route handlers over legacy patterns; do not introduce Pages Router (`pages/`).
+
+## TypeScript
+
+- Use **TypeScript** in **strict mode**.
+- Keep types narrow and explicit; avoid `any` (use `unknown` + refinement when necessary).
+
+## Styling
+
+- Use **Tailwind CSS only**.
+- **No inline styles** (`style={{ ... }}`) and no ad-hoc CSS files unless the project already uses them in the exact area you’re modifying.
+
+## Components
+
+- Use **functional components only** (no class components).
+- Keep components small and composable; extract reusable UI into shared components following existing patterns.
+
+## Structure
+
+- **Follow the existing file/folder structure** in this repo.
+- Before adding new directories, check for an established location/pattern for similar code and match it.
+
