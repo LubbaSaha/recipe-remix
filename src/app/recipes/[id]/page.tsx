@@ -14,21 +14,21 @@ export default async function RecipeDetailPage({ params }: Props) {
   if (!recipe) return notFound();
 
   return (
-    <div className="min-h-screen py-10 bg-gray-50">
+    <div className="min-h-screen py-10 bg-[var(--color-neutral)]">
       <div className="max-w-3xl mx-auto">
         <Link
           href="/"
-          className="inline-block mb-4 text-sm text-blue-600 hover:underline"
+          className="inline-block mb-4 text-sm text-[var(--color-secondary)] hover:underline"
         >
           ← Back to recipes
         </Link>
       </div>
 
-      <div className="max-w-3xl p-8 mx-auto bg-white rounded-lg shadow-md">
+      <div className="max-w-3xl p-8 mx-auto rounded-lg shadow-md bg-[var(--color-tertiary)]">
         <h1 className="mb-2 text-3xl font-bold">{recipe.title}</h1>
-        <p className="mb-6 text-gray-600">{recipe.description}</p>
+        <p className="mb-6 text-[var(--color-neutral-foreground)]">{recipe.description}</p>
 
-        <hr className="mb-6" />
+        <hr className="mb-6 border-[var(--color-neutral-border)]" />
 
         <h2 className="mb-4 text-xl font-semibold">Ingredients</h2>
 
@@ -36,7 +36,7 @@ export default async function RecipeDetailPage({ params }: Props) {
           {recipe.ingredients.map((ingredient) => (
             <li
               key={ingredient}
-              className="px-3 py-2 text-sm bg-gray-100 rounded"
+              className="px-3 py-2 text-sm rounded bg-[var(--color-neutral)]"
             >
               {ingredient}
             </li>

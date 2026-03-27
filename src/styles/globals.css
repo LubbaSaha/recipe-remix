@@ -1,1 +1,61 @@
 @import "tailwindcss";
+
+@theme {
+  --color-primary: #708271;
+  --color-primary-foreground: #fdfbf7;
+  --color-secondary: #c27059;
+  --color-secondary-foreground: #fdfbf7;
+  --color-tertiary: #e8d9c5;
+  --color-tertiary-foreground: #2f3a30;
+  --color-neutral: #fdfbf7;
+  --color-neutral-foreground: #2f3a30;
+  --color-neutral-muted: #efe8dd;
+  --color-neutral-border: #d9cbb8;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-neutral);
+    color: var(--color-neutral-foreground);
+    font-family: var(--font-body), sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-headline), sans-serif;
+  }
+
+  label {
+    font-family: var(--font-body), sans-serif;
+  }
+}
+
+.progress-primary::-webkit-progress-bar,
+.progress-secondary::-webkit-progress-bar {
+  background-color: var(--color-neutral-muted);
+  border-radius: 9999px;
+}
+
+.progress-primary::-webkit-progress-value {
+  background-color: var(--color-primary);
+  border-radius: 9999px;
+}
+
+.progress-secondary::-webkit-progress-value {
+  background-color: var(--color-secondary);
+  border-radius: 9999px;
+}
+
+.progress-primary::-moz-progress-bar {
+  background-color: var(--color-primary);
+  border-radius: 9999px;
+}
+
+.progress-secondary::-moz-progress-bar {
+  background-color: var(--color-secondary);
+  border-radius: 9999px;
+}

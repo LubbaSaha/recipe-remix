@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import IngredientInput from "@/components/recipes/IngredientInput";
 import RecipeList from "@/components/recipes/RecipeList";
@@ -9,7 +9,6 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { useVectorRecipe } from "@/hooks/useVectorRecipes";
 
 export default function SearchClient() {
-  const router = useRouter();
   const searchParams = useSearchParams()!;
   const pathname = usePathname();
 
@@ -23,13 +22,8 @@ export default function SearchClient() {
 
   const [isAdvanced, setIsAdvanced] = useState(false);
 
-  console.log("isAdvanced", isAdvanced);
-
   const regularRecipes = useRecipes(debouncedQuery, showFullMatchOnly);
   const vectorRecipes = useVectorRecipe(debouncedQuery);
-
-  console.log("Regular Recipes:", regularRecipes);
-  console.log("Vector Recipes:", vectorRecipes);
 
   // Update URL when debouncedQuery or toggle changes
   useEffect(() => {
@@ -54,8 +48,11 @@ export default function SearchClient() {
             type="checkbox"
             checked={isAdvanced}
             onChange={(e) => setIsAdvanced(e.target.checked)}
+            className="accent-[var(--color-primary)]"
           />
-          <label className="text-sm">Use Advanced (Vector) Search</label>
+          <label className="text-sm text-[var(--color-neutral-foreground)]">
+            Use Advanced (Vector) Search
+          </label>
         </div>
 
         <div className="flex items-center gap-2">
@@ -63,15 +60,18 @@ export default function SearchClient() {
             type="checkbox"
             checked={showFullMatchOnly}
             onChange={(e) => setShowFullMatchOnly(e.target.checked)}
+            className="accent-[var(--color-primary)]"
           />
-          <label className="text-sm">Show only full matches</label>
+          <label className="text-sm text-[var(--color-neutral-foreground)]">
+            Show only full matches
+          </label>
         </div>
       </div>
 
       {isAdvanced ? (
-        <span className="text-xs text-purple-600">Semantic Match</span>
+        <span className="text-xs text-[var(--color-secondary)]">Semantic Match</span>
       ) : (
-        <span className="text-xs text-gray-600">Ingredient Match</span>
+        <span className="text-xs text-[var(--color-neutral-foreground)]">Ingredient Match</span>
       )}
 
       <RecipeList

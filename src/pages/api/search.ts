@@ -41,11 +41,6 @@ export default async function handler(
     }
 
     if (!validator.matches(rawQuery, /^[a-zA-Z0-9\s]+$/)) {
-      console.warn("Suspicious query:", {
-        ip,
-        query: rawQuery,
-        time: new Date().toISOString(),
-      });
       return res
         .status(400)
         .json({ error: "Query contains invalid characters" });
@@ -64,7 +59,6 @@ export default async function handler(
 
     // cache check
     if (cache.has(query)) {
-      console.log("Cache hit for query:", query);
       return res.status(200).json({ results: cache.get(query) });
     }
 
@@ -78,8 +72,6 @@ export default async function handler(
 
     // store in cache
     cache.set(query, results);
-
-    console.log("Cache miss for query:", query);
 
     return res.status(200).json({ results });
   } catch (err) {
