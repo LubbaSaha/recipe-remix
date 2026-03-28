@@ -22,7 +22,7 @@ export default function RootLayout({
       lang="en"
       className={`${epilogue.variable} ${plusJakartaSans.variable}`}
     >
-      <body className="font-body antialiased">
+      <body className="antialiased">
         <Header />
         <main className="min-h-screen">{children}</main>
       </body>
