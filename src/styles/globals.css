@@ -18,6 +18,8 @@
     background-color: var(--color-neutral);
     color: var(--color-neutral-foreground);
     font-family: var(--font-body), sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
   }
 
   h1,
@@ -27,10 +29,116 @@
   h5,
   h6 {
     font-family: var(--font-headline), sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  h5 {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+  }
+
+  h6 {
+    font-size: 1rem;
+    line-height: 1.25rem;
   }
 
   label {
     font-family: var(--font-body), sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+  }
+}
+
+@layer utilities {
+  .type-display {
+    font-family: var(--font-headline), sans-serif;
+    font-size: 3rem;
+    line-height: 3.25rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .type-h1 {
+    font-family: var(--font-headline), sans-serif;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .type-h2 {
+    font-family: var(--font-headline), sans-serif;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .type-h3 {
+    font-family: var(--font-headline), sans-serif;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .type-h4 {
+    font-family: var(--font-headline), sans-serif;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .type-body {
+    font-family: var(--font-body), sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .type-body-sm {
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+  }
+
+  .type-label {
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+  }
+
+  .type-caption {
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
   }
 }
 
