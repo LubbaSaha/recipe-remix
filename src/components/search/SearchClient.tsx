@@ -39,10 +39,10 @@ export default function SearchClient() {
   }, [debouncedQuery, showFullMatchOnly, pathname]);
 
   return (
-    <div className="p-8 max-w-2xl mx-auto">
+    <div className="max-w-2xl mx-auto p-[var(--space-8)]">
       <IngredientInput value={input} onChange={setInput} />
 
-      <div className="mt-4 flex items-center gap-4">
+      <div className="mt-[var(--space-4)] flex flex-wrap items-center gap-[var(--space-4)]">
         <div className="flex items-center gap-2">
           <input
             type="checkbox"

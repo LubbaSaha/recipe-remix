@@ -25,7 +25,7 @@ export default function RecipeCard({ recipe, vectorMode }: Props) {
 
   return (
     <Link href={`/recipes/${recipe.id}`} className="block">
-      <div className="p-4 transition rounded shadow bg-[var(--color-tertiary)] hover:shadow-md">
+      <div className="p-[var(--space-4)] transition-shadow rounded-[var(--radius-card)] bg-[var(--color-tertiary)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)]">
         <h2 className="text-lg font-semibold">{recipe.title}</h2>
         <p className="text-[var(--color-neutral-foreground)]">{recipe.description}</p>
 

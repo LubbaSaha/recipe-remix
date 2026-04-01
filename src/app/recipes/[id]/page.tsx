@@ -14,7 +14,7 @@ export default async function RecipeDetailPage({ params }: Props) {
   if (!recipe) return notFound();
 
   return (
-    <div className="min-h-screen py-10 bg-[var(--color-neutral)]">
+    <div className="min-h-screen py-[var(--space-10)] bg-[var(--color-neutral)]">
       <div className="max-w-3xl mx-auto">
         <Link
           href="/"
@@ -24,7 +24,7 @@ export default async function RecipeDetailPage({ params }: Props) {
         </Link>
       </div>
 
-      <div className="max-w-3xl p-8 mx-auto rounded-lg shadow-md bg-[var(--color-tertiary)]">
+      <div className="max-w-3xl mx-auto p-[var(--space-8)] rounded-[var(--radius-card)] bg-[var(--color-tertiary)] shadow-[var(--shadow-panel)]">
         <h1 className="mb-2 text-3xl font-bold">{recipe.title}</h1>
         <p className="mb-6 text-[var(--color-neutral-foreground)]">{recipe.description}</p>
 
@@ -32,11 +32,11 @@ export default async function RecipeDetailPage({ params }: Props) {
 
         <h2 className="mb-4 text-xl font-semibold">Ingredients</h2>
 
-        <ul className="grid grid-cols-2 gap-3">
+        <ul className="grid grid-cols-2 gap-[var(--space-3)]">
           {recipe.ingredients.map((ingredient) => (
             <li
               key={ingredient}
-              className="px-3 py-2 text-sm rounded bg-[var(--color-neutral)]"
+              className="px-[var(--space-3)] py-[var(--space-2)] text-sm rounded-[var(--radius-chip)] bg-[var(--color-neutral)]"
             >
               {ingredient}
             </li>
