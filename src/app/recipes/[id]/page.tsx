@@ -1,5 +1,7 @@
+import Card from "@/components/ui/Card";
+import Chip from "@/components/ui/Chip";
+import TextLink from "@/components/ui/TextLink";
 import { getRecipeById } from "@/lib/recipes";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 type Props = {
@@ -16,15 +18,12 @@ export default async function RecipeDetailPage({ params }: Props) {
   return (
     <div className="min-h-screen py-[var(--space-10)] bg-[var(--color-neutral)]">
       <div className="max-w-3xl mx-auto">
-        <Link
-          href="/"
-          className="inline-block mb-4 text-sm text-[var(--color-secondary)] hover:underline"
-        >
+        <TextLink href="/" className="mb-[var(--space-4)] inline-block">
           ← Back to recipes
-        </Link>
+        </TextLink>
       </div>
 
-      <div className="max-w-3xl mx-auto p-[var(--space-8)] rounded-[var(--radius-card)] bg-[var(--color-tertiary)] shadow-[var(--shadow-panel)]">
+      <Card variant="panel" className="max-w-3xl mx-auto p-[var(--space-8)]">
         <h1 className="mb-2 text-3xl font-bold">{recipe.title}</h1>
         <p className="mb-6 text-[var(--color-neutral-foreground)]">{recipe.description}</p>
 
@@ -34,15 +33,12 @@ export default async function RecipeDetailPage({ params }: Props) {
 
         <ul className="grid grid-cols-2 gap-[var(--space-3)]">
           {recipe.ingredients.map((ingredient) => (
-            <li
-              key={ingredient}
-              className="px-[var(--space-3)] py-[var(--space-2)] text-sm rounded-[var(--radius-chip)] bg-[var(--color-neutral)]"
-            >
-              {ingredient}
+            <li key={ingredient}>
+              <Chip>{ingredient}</Chip>
             </li>
           ))}
         </ul>
-      </div>
+      </Card>
     </div>
   );
 }

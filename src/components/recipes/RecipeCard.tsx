@@ -1,3 +1,5 @@
+import Button from "@/components/ui/Button";
+import Card from "@/components/ui/Card";
 import { ScoredRecipe } from "@/types/recipe";
 import Link from "next/link";
 import { useState } from "react";
@@ -25,7 +27,7 @@ export default function RecipeCard({ recipe, vectorMode }: Props) {
 
   return (
     <Link href={`/recipes/${recipe.id}`} className="block">
-      <div className="p-[var(--space-4)] transition-shadow rounded-[var(--radius-card)] bg-[var(--color-tertiary)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)]">
+      <Card variant="interactive" className="p-[var(--space-4)]">
         <h2 className="text-lg font-semibold">{recipe.title}</h2>
         <p className="text-[var(--color-neutral-foreground)]">{recipe.description}</p>
 
@@ -76,23 +78,24 @@ export default function RecipeCard({ recipe, vectorMode }: Props) {
               })}
 
               {hiddenCount > 0 && !showAll && (
-                <button
+                <Button
                   type="button"
-                  className="mt-1 text-xs text-[var(--color-secondary)] hover:underline"
+                  variant="link"
+                  className="mt-1 block w-full text-left text-xs"
                   onClick={(e) => {
                     e.preventDefault();
                     setShowAll(true);
                   }}
                 >
                   +{hiddenCount} more
-                </button>
+                </Button>
               )}
             </ul>
           </div>
         ) : (
           ""
         )}
-      </div>
+      </Card>
     </Link>
   );
 }
