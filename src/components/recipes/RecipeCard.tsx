@@ -1,5 +1,6 @@
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
+import ProgressBar from "@/components/ui/ProgressBar";
 import { ScoredRecipe } from "@/types/recipe";
 import Link from "next/link";
 import { useState } from "react";
@@ -31,20 +32,11 @@ export default function RecipeCard({ recipe, vectorMode }: Props) {
         <h2 className="text-lg font-semibold">{recipe.title}</h2>
         <p className="text-[var(--color-neutral-foreground)]">{recipe.description}</p>
 
-        {vectorMode && recipe.totalQueryCount > 0 ? (
-          <progress
-            className="w-full mt-2 h-2 progress-primary"
-            max={100}
+        {recipe.totalQueryCount > 0 && (
+          <ProgressBar
+            variant={vectorMode ? "primary" : "secondary"}
             value={progressValue}
           />
-        ) : (
-          recipe.totalQueryCount > 0 && (
-            <progress
-              className="w-full mt-2 h-2 progress-secondary"
-              max={100}
-              value={progressValue}
-            />
-          )
         )}
 
         {recipe.totalQueryCount > 0 ? (
