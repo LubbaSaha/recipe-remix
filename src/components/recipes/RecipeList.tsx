@@ -10,7 +10,7 @@ export default function RecipeList({ recipes, vectorMode }: Props) {
   return (
     <div className="grid mt-[var(--space-4)] gap-[var(--space-4)]">
       {recipes.length === 0 && (
-        <p className="mt-[var(--space-4)] text-[var(--color-neutral-foreground)]">
+        <p className="mt-[var(--space-4)] type-body-sm text-[var(--color-neutral-foreground)]">
           No recipes found
         </p>
       )}

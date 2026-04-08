@@ -29,8 +29,10 @@ export default function RecipeCard({ recipe, vectorMode }: Props) {
   return (
     <Link href={`/recipes/${recipe.id}`} className="block">
       <Card variant="interactive" className="p-[var(--space-4)]">
-        <h2 className="text-lg font-semibold">{recipe.title}</h2>
-        <p className="text-[var(--color-neutral-foreground)]">{recipe.description}</p>
+        <h2 className="type-h5">{recipe.title}</h2>
+        <p className="type-body-sm text-[var(--color-neutral-foreground)]">
+          {recipe.description}
+        </p>
 
         {recipe.totalQueryCount > 0 && (
           <ProgressBar
@@ -41,7 +43,7 @@ export default function RecipeCard({ recipe, vectorMode }: Props) {
 
         {recipe.totalQueryCount > 0 ? (
           <div>
-            <div className="mt-2 text-xs">
+            <div className="mt-2 type-caption">
               {vectorMode ? "Semantic Match:" : "Match Score:"}{" "}
               <span className="font-semibold">
                 {vectorMode
@@ -50,7 +52,7 @@ export default function RecipeCard({ recipe, vectorMode }: Props) {
               </span>
             </div>
 
-            <ul className="mt-2 list-disc list-inside text-sm grid grid-flow-col grid-rows-3">
+            <ul className="mt-2 type-body-sm list-disc list-inside grid grid-flow-col grid-rows-3">
               {visibleIngredients.map((ingredient) => {
                 const isMatched =
                   recipe.matchedIngredients.includes(ingredient);

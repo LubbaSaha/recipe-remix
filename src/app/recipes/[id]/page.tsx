@@ -24,12 +24,14 @@ export default async function RecipeDetailPage({ params }: Props) {
       </div>
 
       <Card variant="panel" className="max-w-3xl mx-auto p-[var(--space-8)]">
-        <h1 className="mb-2 text-3xl font-bold">{recipe.title}</h1>
-        <p className="mb-6 text-[var(--color-neutral-foreground)]">{recipe.description}</p>
+        <h1 className="type-h2 mb-2">{recipe.title}</h1>
+        <p className="type-body text-[var(--color-neutral-foreground)] mb-6">
+          {recipe.description}
+        </p>
 
         <hr className="mb-6 border-[var(--color-neutral-border)]" />
 
-        <h2 className="mb-4 text-xl font-semibold">Ingredients</h2>
+        <h2 className="type-h4 mb-4">Ingredients</h2>
 
         <ul className="grid grid-cols-2 gap-[var(--space-3)]">
           {recipe.ingredients.map((ingredient) => (

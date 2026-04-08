@@ -50,7 +50,7 @@ export default function SearchClient() {
             onChange={(e) => setIsAdvanced(e.target.checked)}
             className="accent-[var(--color-primary)]"
           />
-          <label className="text-sm text-[var(--color-neutral-foreground)]">
+          <label className="type-label text-[var(--color-neutral-foreground)]">
             Use Advanced (Vector) Search
           </label>
         </div>
@@ -62,16 +62,20 @@ export default function SearchClient() {
             onChange={(e) => setShowFullMatchOnly(e.target.checked)}
             className="accent-[var(--color-primary)]"
           />
-          <label className="text-sm text-[var(--color-neutral-foreground)]">
+          <label className="type-label text-[var(--color-neutral-foreground)]">
             Show only full matches
           </label>
         </div>
       </div>
 
       {isAdvanced ? (
-        <span className="text-xs text-[var(--color-secondary)]">Semantic Match</span>
+        <span className="type-caption text-[var(--color-secondary)]">
+          Semantic Match
+        </span>
       ) : (
-        <span className="text-xs text-[var(--color-neutral-foreground)]">Ingredient Match</span>
+        <span className="type-caption text-[var(--color-neutral-foreground)]">
+          Ingredient Match
+        </span>
       )}
 
       <RecipeList
