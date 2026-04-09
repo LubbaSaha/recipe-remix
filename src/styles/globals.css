@@ -92,6 +92,38 @@
 }
 
 @layer utilities {
+  .surface-card {
+    border-radius: var(--radius-card);
+    background-color: var(--color-tertiary);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 150ms ease;
+  }
+
+  .surface-card:hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .surface-panel {
+    border-radius: var(--radius-card);
+    background-color: var(--color-tertiary);
+    box-shadow: var(--shadow-panel);
+  }
+
+  .stack-2 {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .stack-3 {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .stack-4 {
+    display: grid;
+    gap: var(--space-4);
+  }
+
   .type-display {
     font-family: var(--font-headline), sans-serif;
     font-size: 3rem;

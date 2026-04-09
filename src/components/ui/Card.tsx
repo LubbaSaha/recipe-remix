@@ -7,9 +7,8 @@ type CardProps = ComponentPropsWithoutRef<"div"> & {
 };
 
 const variantClassName: Record<CardVariant, string> = {
-  interactive:
-    "shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-card-hover)]",
-  panel: "shadow-[var(--shadow-panel)]",
+  interactive: "surface-card",
+  panel: "surface-panel",
 };
 
 export default function Card({
@@ -17,8 +16,7 @@ export default function Card({
   className = "",
   ...props
 }: CardProps) {
-  const base =
-    "rounded-[var(--radius-card)] bg-[var(--color-tertiary)] " + variantClassName[variant];
+  const base = variantClassName[variant];
 
   return <div className={`${base} ${className}`.trim()} {...props} />;
 }
